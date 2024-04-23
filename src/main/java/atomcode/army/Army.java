@@ -1,61 +1,44 @@
 package atomcode.army;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Army {
-    private Map<String, List<Soldier>> armyMap;
+    private List<Soldier> soldierList;
 
     public Army () {
         this.intializeArmy();
     }
 
     public void intializeArmy () {
+        soldierList = new ArrayList<>();
 
-        final List<Soldier> swordsmantList = new ArrayList<>();
-        final Swordsman swordman1 = new Swordsman("Swordman-1");
-        final Swordsman swordman2 = new Swordsman("Swordman-2");
-        swordsmantList.add(swordman1);
-        swordsmantList.add(swordman2);
-
-        final List<Soldier> archerList = new ArrayList<>();
-        final Archer archer1 = new Archer("Archer-1");
-        final Archer archer2 = new Archer("Archer-2");
-        final Archer archer3 = new Archer("Archer-3");
-        archerList.add(archer1);
-        archerList.add(archer2);
-        archerList.add(archer3);
-
-        final List<Soldier> spearmanList = new ArrayList<>();
-        final Spearman spearman1 = new Spearman("Spearman-1");
-        final Spearman spearman2 = new Spearman("Spearman-2");
-        spearmanList.add(spearman1);
-        spearmanList.add(spearman2);
-
-        final List<Soldier> berserkList = new ArrayList<>();
-        final Berserk berserk1 = new Berserk("Berserk-1");
-        berserkList.add(berserk1);
-
-        final List<Soldier> knightList = new ArrayList<>();
-        final Knight knight1 = new Knight("Knight-1");
-        final Knight knight2 = new Knight("Knight-2");
-        final Knight knight3 = new Knight("Knight-3");
-        knightList.add(knight1);
-        knightList.add(knight2);
-        knightList.add(knight3);
-
-        this.armyMap = new HashMap<>();
-        armyMap.put("Swordman", swordsmantList);
-        armyMap.put("Archer", archerList);
-        armyMap.put("Spearman", spearmanList);
-        armyMap.put("Berserk", berserkList);
-        armyMap.put("Knight", knightList);
+        final Soldier swordman1 = new Swordsman("Swordman-1");
+        soldierList.add(swordman1);
+        final Soldier swordman2 = new Swordsman("Swordman-2");
+        soldierList.add(swordman2);
+        final Soldier archer1 = new Archer("Archer-1");
+        soldierList.add(archer1);
+        final Soldier archer2 = new Archer("Archer-2");
+        soldierList.add(archer2);
+        final Soldier archer3 = new Archer("Archer-3");
+        soldierList.add(archer3);
+        final Soldier spearman1 = new Spearman("Spearman-1");
+        soldierList.add(spearman1);
+        final Soldier spearman2 = new Spearman("Spearman-2");
+        soldierList.add(spearman2);
+        final Soldier berserk1 = new Berserk("Berserk-1");
+        soldierList.add(berserk1);
+        final Soldier knight1 = new Knight("Knight-1");
+        soldierList.add(knight1);
+        final Soldier knight2 = new Knight("Knight-2");
+        soldierList.add(knight2);
+        final Soldier knight3 = new Knight("Knight-3");
+        soldierList.add(knight3);
     }
 
-    public Map<String, List<Soldier>> getArmyMap () {
-        return this.armyMap;
+    public List<Soldier> getSoldierList () {
+        return this.soldierList;
     }
 
 

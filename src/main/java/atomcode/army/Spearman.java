@@ -1,7 +1,14 @@
 package atomcode.army;
 
-public class Spearman extends Soldier {
+import atomcode.interfaces.Defensive;
+
+public class Spearman extends Soldier implements Defensive {
     public Spearman (String name) {
-        super(name, 4, "blocking the enemy", "DEFENSIVE");
+        super(name, 4, "Spearman");
+    }
+
+    @Override
+    public void defense () {
+        System.out.println(getSoldierType() + " " + getName() + " deals " + getDamage() + " damage.");
     }
 }

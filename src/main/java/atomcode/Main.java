@@ -1,19 +1,19 @@
 package atomcode;
 
-import atomcode.action.Action;
-import atomcode.action.Report;
-import atomcode.action.SpecialAction;
-import atomcode.action.StandardAction;
 import atomcode.army.Army;
+import atomcode.army.Soldier;
+import atomcode.interfaces.Defensive;
+import atomcode.interfaces.Flank;
+import atomcode.interfaces.Offensive;
+
+import javax.swing.*;
+import java.util.List;
 
 public class Main {
-
     private final static Army army = new Army();
     private static String fightCommand;
     private static String notification;
-
     public static void main(String[] args) {
-
         fightCommand = "report";
         getFightCommandToSoldiers(fightCommand, army);
 
@@ -25,18 +25,6 @@ public class Main {
 
         fightCommand = "flank";
         getFightCommandToSoldiers(fightCommand, army);
-
-        fightCommand = "chopp";
-        getFightCommandToSoldiers(fightCommand, army);
-
-        fightCommand = "block";
-        getFightCommandToSoldiers(fightCommand, army);
-
-        fightCommand = "smash";
-        getFightCommandToSoldiers(fightCommand, army);
-
-        fightCommand = "fire";
-        getFightCommandToSoldiers(fightCommand, army);
     }
 
 
@@ -45,31 +33,32 @@ public class Main {
         String divider = "- - - - - " + notification + " - - - - -";
         System.out.println(divider);
 
-        if (fightCommand.equals("report")) {
-            reportCommand(fightCommand, army);
-            System.out.println();
-        } else if (fightCommand.equals("offensive strike") || fightCommand.equals("defensive formation")) {
-            standardCommand(fightCommand, army);
-            System.out.println();
-        } else {
-            specialCommand(fightCommand, army);
-            System.out.println();
+        List<Soldier> soldierList = army.getSoldierList();
+        for (Soldier soldier : soldierList) {
+            String soldierClass = soldier.soldierClass(soldier);
+            switch (fightCommand) {
+                case "report":
+                    soldier.report(soldierClass);
+                    break;
+                case "offensive strike":
+                    if (soldier.getSoldierClass().equals("ADAPTABLE") || soldier.getSoldierClass().equals("OFFENSIVE")) {
+                        ((Offensive) soldier).offense();
+                    }
+                    break;
+                case "defensive formation":
+                    if (soldier.getSoldierClass().equals("ADAPTABLE") || soldier.getSoldierClass().equals("DEFENSIVE")) {
+                        ((Defensive) soldier).defense();
+                    }
+                    break;
+                case "flank":
+                    if (soldier instanceof Flank) {
+                        ((Flank) soldier).flank();
+                    }
+                    break;
+                default:
+                    System.out.println("Unknown command: " + fightCommand);
+            }
         }
+        System.out.println();
     }
-
-    public static void reportCommand(String fightCommand, Army army) {
-        Action reportAction = new Report();
-        reportAction.command(fightCommand, army.getArmyMap());
-    }
-
-    public static void standardCommand(String fightCommand, Army army) {
-        Action standardAction = new StandardAction();
-        standardAction.command(fightCommand, army.getArmyMap());
-    }
-
-    public static void specialCommand(String fightCommand, Army army) {
-        Action specialAction = new SpecialAction();
-        specialAction.command(fightCommand, army.getArmyMap());
-    }
-
 }

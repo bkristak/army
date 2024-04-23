@@ -1,7 +1,14 @@
 package atomcode.army;
 
-public class Archer extends Soldier {
+import atomcode.interfaces.Defensive;
+
+public class Archer extends Soldier implements Defensive {
     public Archer (String name) {
-        super(name, 2, "cease-firing fire arrows", "DEFENSIVE");
+        super(name, 2, "Archer");
+    }
+
+    @Override
+    public void defense() {
+        System.out.println(getSoldierType() + " " + getName() + " deals " + getDamage() + " damage.");
     }
 }
