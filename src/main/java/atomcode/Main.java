@@ -34,30 +34,25 @@ public class Main {
         System.out.println(divider);
 
         List<Soldier> soldierList = army.getSoldierList();
+
         for (Soldier soldier : soldierList) {
             String soldierClass = soldier.soldierClass(soldier);
-            switch (fightCommand) {
-                case "report":
-                    soldier.report(soldierClass);
-                    break;
-                case "offensive strike":
-                    if (soldier.getSoldierClass().equals("ADAPTABLE") || soldier.getSoldierClass().equals("OFFENSIVE")) {
-                        ((Offensive) soldier).offense();
-                    }
-                    break;
-                case "defensive formation":
-                    if (soldier.getSoldierClass().equals("ADAPTABLE") || soldier.getSoldierClass().equals("DEFENSIVE")) {
-                        ((Defensive) soldier).defense();
-                    }
-                    break;
-                case "flank":
-                    if (soldier instanceof Flank) {
-                        ((Flank) soldier).flank();
-                    }
-                    break;
-                default:
-                    System.out.println("Unknown command: " + fightCommand);
-            }
+
+           if (fightCommand.equals("report")) {
+               soldier.report(soldierClass);
+           }
+
+           if (fightCommand.equals("offensive strike") && soldier instanceof Offensive) {
+               ((Offensive) soldier).offense();
+           }
+
+           if (fightCommand.equals("defensive formation") && soldier instanceof Defensive) {
+               ((Defensive) soldier).defense();
+           }
+
+           if (fightCommand.equals("flank") && soldier instanceof Flank) {
+               ((Flank) soldier).flank();
+           }
         }
         System.out.println();
     }
