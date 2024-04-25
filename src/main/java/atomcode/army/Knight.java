@@ -1,9 +1,8 @@
 package atomcode.army;
 
-import atomcode.interfaces.Flank;
 import atomcode.interfaces.Offensive;
 
-public class Knight extends Soldier implements Offensive, Flank {
+public class Knight extends Soldier implements Offensive {
 
     public Knight (String name) {
         super (name, 5, "Knight");
@@ -15,7 +14,10 @@ public class Knight extends Soldier implements Offensive, Flank {
     }
 
     @Override
-    public void flank() {
-        System.out.println(getSoldierType() + " " + getName() + " is flanking.");
+    public void specialAbility (String fightCommand, String SPECIAL_ABILITY) {
+        SPECIAL_ABILITY = "flank";
+        if (fightCommand.equals(SPECIAL_ABILITY)) {
+            System.out.println(getSoldierType() + " " + getName() + " is flanking.");
+        }
     }
 }

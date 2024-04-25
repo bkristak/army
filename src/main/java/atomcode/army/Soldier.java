@@ -8,6 +8,7 @@ public abstract class Soldier {
     private final int damage;
     private final String soldierType;
     private String soldierClass;
+    private static String SPECIAL_ABILITY = "";
 
     public Soldier(String name, int damage, String soldierType) {
         this.name = name;
@@ -29,6 +30,12 @@ public abstract class Soldier {
     public void report (String soldierClass) {
         soldierClass = soldierClass(this);
         System.out.println("Soldier" + soldierType + " " + name + " here! Type - " + soldierClass);
+    }
+
+    public void specialAbility (String fightCommand, String SPECIAL_ABILITY) {
+        if (fightCommand.contains(SPECIAL_ABILITY)) {
+            System.out.println(getSoldierType() + " " + getName() + "");
+        }
     }
 
     public String getName() {
